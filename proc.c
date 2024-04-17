@@ -224,8 +224,7 @@ fork(void)
 // Exit the current process.  Does not return.
 // An exited process remains in the zombie state
 // until its parent calls wait() to find out it exited.
-void
-exit(void)
+void exit(void)
 {
   struct proc *curproc = myproc();
   struct proc *p;
@@ -531,4 +530,28 @@ procdump(void)
     }
     cprintf("\n");
   }
+}
+
+void hello(void) 
+{
+  cprintf("\n\n Hello from your kernal space! \n\n");
+}
+
+int getsiblings(void)
+{
+  int parentPID = myproc()->parent->pid;
+  struct proc *p;
+  acquire(&ptable.lock);
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++)
+  {
+    if (p->parent->pid == parentPID)
+    {
+      release(&ptable.lock);
+
+      return p->pid;
+      
+    }
+  }
+  release(&ptable.lock);
+  return 0;
 }
