@@ -96,9 +96,8 @@ sys_uptime(void)
 }
 
 int 
-sys_getsiblings(void){
-  getsiblings();
-  return 0;
+sys_getsiblings(void){  
+  return getsiblings();
 }
 
 int sys_waitpid(void){

@@ -534,16 +534,19 @@ procdump(void)
   }
 }
 
-void getsiblings(void){
+int getsiblings(void){
   int pnt = myproc()->parent->pid;
   struct proc *p;
   acquire(&ptable.lock);
   for(p=ptable.proc; p < &ptable.proc[NPROC];p++){
     if(p->parent->pid == pnt){
-      cprintf("%d\n", p->pid);
+      // cprintf("%d\n", p->pid);
+      release(&ptable.lock);
+      return p->pid;
     }
   }
   release(&ptable.lock);
+  return 0;
 }
 
 int waitpid(int pid,int *status, int options){

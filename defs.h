@@ -120,7 +120,7 @@ void            userinit(void);
 int             wait(int *status);
 void            wakeup(void*);
 void            yield(void);
-void            getsiblings(void);
+int            getsiblings(void);
 int             waitpid(int pid, int *status, int options);
 
 // swtch.S
