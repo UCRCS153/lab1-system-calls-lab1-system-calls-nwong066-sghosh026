@@ -292,9 +292,9 @@ int wait(int *status){
         p->killed = 0;
         p->state = UNUSED;
         release(&ptable.lock);
-        // if (status != 0){
-        //   *status = p->exitStatus;
-        // }
+        if (status != 0){
+          *status = p->exitStatus;
+        }
         // p->exitStatus = 0;
         return pid;
       }
