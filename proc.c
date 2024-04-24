@@ -326,20 +326,25 @@ int waitpid(int pid, int *status, int options )
       if(p->parent != curproc)
         continue;
       havekids = 1;
-      if(p->state == ZOMBIE && p->pid == pid){
-        // Found one.
-        pid2 = p->pid;
-        kfree(p->kstack);
-        p->kstack = 0;
-        freevm(p->pgdir);
-        p->pid = 0;
-        p->parent = 0;
-        p->name[0] = 0;
-        p->killed = 0;
-        p->state = UNUSED;
-        release(&ptable.lock);
-        *status = p->exit_status;
-        return pid2;
+      if (p->pid == pid)
+      {
+
+      
+        if(p->state == ZOMBIE ){
+          // Found one.
+          pid2 = p->pid;
+          kfree(p->kstack);
+          p->kstack = 0;
+          freevm(p->pgdir);
+          p->pid = 0;
+          p->parent = 0;
+          p->name[0] = 0;
+          p->killed = 0;
+          p->state = UNUSED;
+          release(&ptable.lock);
+          *status = p->exit_status;
+          return pid2;
+        }
       }
     }
 
