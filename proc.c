@@ -328,7 +328,7 @@ int waitpid(int pid, int *status, int options )
       // if(p->pid != pid)
       //   continue;
       havekids = 1;
-      if(p->state == ZOMBIE ){
+      if(p->state == ZOMBIE && p->pid == pid){
         // Found one.
         pid2 = p->pid;
         kfree(p->kstack);
