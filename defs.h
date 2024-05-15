@@ -123,6 +123,7 @@ void            yield(void);
 void            hello(void);
 int             getsiblings(void);
 int             waitpid(int pid, int *status, int options);
+void            setpriority(int priority_value);
 
 // swtch.S
 void            swtch(struct context**, struct context*);

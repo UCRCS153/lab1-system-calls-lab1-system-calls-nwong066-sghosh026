@@ -26,6 +26,7 @@ int uptime(void);
 int hello(void);
 int getsiblings(void);
 int waitpid(int pid, int *status, int options);
+int setpriority(int priority_val);
 
 // ulib.c
 int stat(const char*, struct stat*);

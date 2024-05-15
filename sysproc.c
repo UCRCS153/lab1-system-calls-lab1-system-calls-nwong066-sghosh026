@@ -134,3 +134,15 @@ int sys_getsiblings(void)
 
 }
 
+int sys_setpriority(void)
+{
+  int priority_value;
+
+  if (argint(0, &priority_value) < 0)
+  {
+    return -1;
+  }
+  setpriority(priority_value);
+  return 0;
+}
+
